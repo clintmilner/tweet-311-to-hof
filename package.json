@@ -7,13 +7,16 @@
     "start": "npm-run-all build run",
     "build": "babel src -d dist",
     "reset": "reset && node dist/index.js",
-    "run": "node dist/index.js"
+    "tweet": "node dist/index.js",
+    "page": "node index.js",
+    "run": "npm-run-all -p page tweet"
   },
   "engines": {
     "node": "10.x"
   },
   "dependencies": {
     "dotenv": "6.0.0",
+    "express": "^4.16.4",
     "node-schedule": "1.3.0",
     "npm-run-all": "4.1.3",
     "twitter": "1.7.1"
