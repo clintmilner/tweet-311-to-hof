@@ -4,9 +4,10 @@
   "description": "Get 311 into the Rock & Roll HOF",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all build reset",
+    "start": "npm-run-all build run",
     "build": "babel src -d dist",
-    "reset": "reset && node dist/index.js"
+    "reset": "reset && node dist/index.js",
+    "run": "node dist/index.js"
   },
   "engines": {
     "node": "10.x"
