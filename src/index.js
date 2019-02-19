@@ -40,7 +40,7 @@ const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
     } else {
         scheduler.cancel();
         // count = 0;
-        console.log('All tweets have been published, resetting counter to 0');
+        console.log('All tweets have been published, stopping scheduler');
     }
 });
 
