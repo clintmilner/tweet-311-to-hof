@@ -10,11 +10,13 @@ const client = new Twitter({
     access_token_key: process.env.ACCESS_TOKEN_KEY,
     access_token_secret: process.env.ACCESS_TOKEN_KEY_SECRET,
 });
-const tweets = require('../tweets.json');
+const tweets = require('../tweets.json'),
+    tag = (process.env.TWEET_TAG) ? process.env.TWEET_TAG : null,
+    canTweet = (process.env.CAN_TWEET && process.env.CAN_TWEET === 'true');
 
-let count = 0;
+let count = process.env.TWEET_START || 0;
 
-console.log(`Starting: Tweeting every [${process.env.TWEET_TIMER}]`);
+console.log(`Starting: Tweeting every [${process.env.TWEET_TIMER}]`, process.env.TWEET_TAG);
 
 const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
     if(tweets[count]) {
@@ -25,18 +27,21 @@ const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
             hashtagString += `#${element} `
         );
 
-        const tweet = {
-            status: `${title} ${hashtagString} @311`,
-        };
 
-        client.post('statuses/update', tweet, (error) => {
-            if(error){
-                console.log(error);
-            } else{
-                console.log(`Tweet #${count}: '${title}'`);
-            }
-            ++count;
-        });
+        if(canTweet){
+            const tweet = {status: `${title} ${hashtagString} ${(tag) ? tag : ''}`};
+            client.post('statuses/update', tweet, (error) => {
+                if(error){
+                    console.log(error);
+                } else{
+                    console.log(`Tweet #${count}: '${title}'`);
+                }
+            });
+        } else {
+            console.log(`🐦 Tweet #${count}: '${title}'`);
+        }
+        ++count;
+
     } else {
         scheduler.cancel();
         // count = 0;
