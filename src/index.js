@@ -16,7 +16,9 @@ const tweets = require('../tweets.json'),
 
 let count = process.env.TWEET_START || 0;
 
-console.log(`Starting: Tweeting every '${process.env.TWEET_TIMER}]'`, process.env.TWEET_TAG);
+console.log(`Starting: Tweeting every "${process.env.TWEET_TIMER}"`);
+console.log(`Starting with Tweet #${count}`);
+console.log(`Tagging with ${tag}`);
 
 const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
     if(tweets[count]) {

@@ -8,6 +8,7 @@
     "build": "babel src -d dist",
     "reset": "reset && node dist/index.js",
     "tweet": "node dist/index.js",
+    "tweetmem": "node --max-old-space-size=1024 dist/index.js",
     "page": "node index.js",
     "run": "npm-run-all -p page tweet"
   },
