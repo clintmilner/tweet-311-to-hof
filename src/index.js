@@ -19,6 +19,7 @@ let count = process.env.TWEET_START || 0;
 console.log(`Starting: Tweeting every "${process.env.TWEET_TIMER}"`);
 console.log(`Starting with Tweet #${count}`);
 console.log(`Tagging with ${tag}`);
+console.log(`${(canTweet) ? 'We have the permission to tweet! 🐦' : 'Sorry, we cannot tweet right now 🙁'}`);
 
 const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
     if(tweets[count]) {
