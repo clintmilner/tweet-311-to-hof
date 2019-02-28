@@ -30,7 +30,6 @@ const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
             hashtagString += `#${element} `
         );
 
-
         if(canTweet){
             const tweet = {status: `${title} ${hashtagString} ${(tag) ? tag : ''}`};
             client.post('statuses/update', tweet, (error) => {

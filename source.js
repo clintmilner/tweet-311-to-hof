@@ -1,24 +1,29 @@
-const counter = (tweet, name) => {
-    const limit = (250 - 24);
-    if(tweet.length > limit) {
-        //console.log(limit, tweet.length, name, tweet);
+const buildTweet = (msg, name, location) => {
+    const limit = 250,
+        extras = 58;
+    let tweetLength = msg.length + name.length + location.length,
+        tweet = ``;
+
+    if(tweetLength > (limit-extras)){
+        let trimTweet = msg.substring(0, (limit-extras-3)); // tweet max - hashtags - ellipses
+        tweet = `${trimTweet}... -${name} from ${location}`;
+        // console.warn(tweet.length, tweet);
+    } else {
+        tweet = `"${msg}" -${name} from ${location}`;
+        // console.log(tweet.length, tweet);
     }
-    return (tweet.length <= limit);
+
+    return tweet;
 };
-    let list = Array.from(document.querySelectorAll('.signature'));
+let list = Array.from(document.querySelectorAll('.signature'));
 let tweetList = [];
 list.forEach((item) => {
     let name = item.querySelector('.signature__name').innerText;
     let location = item.querySelector('.signature__location').innerText;
     let msg = item.querySelector('.signature__answer').innerText;
-    if(msg && msg !== ''
-        && name && name !== 'name not displayed'
-        && counter(msg, name)){
-        let details = {}
-        // details['name'] = name;
-        // details['location'] = location;
-        // details['msg'] = msg;
-        details['title'] = `"${msg}" -${name} from ${location}`;
+    if(msg && msg !== '' && name && name !== 'name not displayed'){
+        let details = {};
+        details['title'] = buildTweet(msg, name, location);
         details['hashtags'] = ['RockAndRollHOF', '311HOF'];
         tweetList.push(details);
     }
