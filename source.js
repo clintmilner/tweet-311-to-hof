@@ -7,10 +7,8 @@ const buildTweet = (msg, name, location) => {
     if(tweetLength > (limit-extras)){
         let trimTweet = msg.substring(0, (limit-extras-3)); // tweet max - hashtags - ellipses
         tweet = `${trimTweet}... -${name} from ${location}`;
-        // console.warn(tweet.length, tweet);
     } else {
         tweet = `"${msg}" -${name} from ${location}`;
-        // console.log(tweet.length, tweet);
     }
 
     return tweet;
