@@ -21,7 +21,10 @@ list.forEach((item) => {
     let name = item.querySelector('.signature__name').innerText;
     let location = item.querySelector('.signature__location').innerText;
     let msg = item.querySelector('.signature__answer').innerText;
-    if(msg && msg !== '' && name && name !== 'name not displayed'){
+    if(msg && msg !== ''){
+        if(name && name !== 'name not displayed') {
+            name = 'Excitable'
+        }
         let details = {};
         details['title'] = buildTweet(msg, name, location);
         details['hashtags'] = ['RockAndRollHOF', '311HOF'];
