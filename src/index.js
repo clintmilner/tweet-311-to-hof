@@ -38,17 +38,17 @@ const scheduler = NodeSchedule.scheduleJob(process.env.TWEET_TIMER, () => {
         );
 
         if(canTweet){
-            const tweet = `${title} ${hashtagString} ${(tag) ? tag : ''}`,
+            const tweet = `${title} ${hashtagString}`,
                 tweetObj = {status: tweet};
             client.post('statuses/update', tweetObj, (error) => {
                 if(error){
                     log.error(error);
                 } else{
-                    log.debug(`🐔 Tweet #${count}: ${tweet}`);
+                    log.debug(`🐦 #${count}/${tweets.length}: ${tweet}`);
                 }
             });
         } else {
-            log.info(`🐦 Tweet #${count}: ${title} ${hashtagString} ${(tag) ? tag : ''}`);
+            log.info(`🐔 #${count}/${tweets.length}: ${title} ${hashtagString}`);
         }
         ++count;
 
